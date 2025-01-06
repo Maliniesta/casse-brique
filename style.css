@@ -19,3 +19,12 @@ canvas {
   border: 4px solid white;
   display: block; /* Supprime tout espacement indésirable autour du canvas */
 }
+
+@media (max-width: 768px) {
+  body {
+    background-size: contain; /* Change l'ajustement de l'image pour les petits écrans */
+  }
+  canvas {
+    width: 90%; /* Réduit la taille du canvas pour les petits écrans */
+  }
+}
