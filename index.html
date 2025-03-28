@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <canvas id="myCanvas" width="1500" height="1300"></canvas>
+    <canvas id="myCanvas" width="1500" height="600"></canvas>
 
     <script>
       var canvas = document.getElementById("myCanvas");
@@ -26,12 +26,13 @@
       var brickRowCount = 5;
       var brickColumnCount = 13;
       var brickWidth = 100;
-      var brickHeight = 80;
+      var brickHeight = 30;
       var brickPadding = 10;
       var brickOffsetTop = 30;
       var brickOffsetLeft = 30;
       var score = 0;
       var lives = 3;
+      
 
       var bricks = [];
       for (var c = 0; c < brickColumnCount; c++) {
@@ -181,16 +182,30 @@
         }
       }
 
+      // Écouteur pour les événements tactiles
+document.addEventListener("touchstart", touchMoveHandler, false);
+document.addEventListener("touchmove", touchMoveHandler, false);
+
+function touchMoveHandler(e) {
+  // Empêcher le comportement par défaut (exemple : défilement)
+  e.preventDefault();
+
+  var touchX = e.touches[0].clientX - canvas.offsetLeft;
+  if (touchX > 0 && touchX < canvas.width) {
+    paddleX = touchX - paddleWidth / 2; // Ajuster la position de la barre
+  }
+}
+
       function drawScore() {
         ctx.font = "40px Arial";
         ctx.fillStyle = "red";
-        ctx.fillText("Score: " + score, 700, 600);
+        ctx.fillText("Score: " + score, 400, 300);
       }
 
       function drawLives() {
         ctx.font = "40px Arial";
         ctx.fillStyle = "green";
-        ctx.fillText("Vies: " + lives, canvas.width - 790, 700); // Correction de la position Y
+        ctx.fillText("Vies: " + lives, canvas.width - 700, 300); // Correction de la position Y
       }
 
       draw();
